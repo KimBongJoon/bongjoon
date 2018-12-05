@@ -15,7 +15,7 @@ public class RealMain extends JFrame {
 	public RealMain() {
 		setTitle("∫¿¡ÿ»Ò's ªÁº≥ ≈‰≈‰πÊ");
 		getContentPane().setForeground(new Color(0, 0, 51));
-		getContentPane().setBackground(new Color(51, 51, 51));
+		getContentPane().setBackground(new Color(0, 0, 0));
 		setBackground(Color.WHITE);
 		setSize(450, 700);
 		getContentPane().setLayout(null);
@@ -43,7 +43,7 @@ public class RealMain extends JFrame {
 		JButton btnNewButton_2 = new JButton();		// ¥ﬁ∆ÿ¿Ã∞Ê¡÷ ªÁ¡¯
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.racing();
+				new RacingGame();
 			}
 		});
 		btnNewButton_2.setIcon(new ImageIcon("1.PNG"));
@@ -102,6 +102,11 @@ public class RealMain extends JFrame {
 		button_1.setFont(new Font("HYø±º≠M", Font.PLAIN, 14));
 		button_1.setBackground(new Color(204, 204, 102));
 		panel_1.add(button_1);
+		
+		JLabel lblNewLabel = new JLabel();
+		lblNewLabel.setIcon(new ImageIcon("gold.jpg"));
+		lblNewLabel.setBounds(111, 0, 231, 80);
+		getContentPane().add(lblNewLabel);
 		
 		setVisible(true);
 		

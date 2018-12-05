@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 
 import java.util.ArrayList;
@@ -35,7 +37,8 @@ public class FakeMain extends JFrame implements ActionListener{
 	JButton button_5;
 	JButton button_6;
 	JPasswordField passwordField;
-		
+	static String memberId;	// 로그인기록 유지
+			
 	public FakeMain() {
 		getContentPane().setBackground(Color.WHITE);
 		setSize(655,700);
@@ -183,6 +186,8 @@ public class FakeMain extends JFrame implements ActionListener{
 		Dimension frameSize = this.getSize(); // 프레임 사이즈
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
 		this.setLocation((screenSize.width - frameSize.width)/2, (screenSize.height - frameSize.height)/2); // 화면 중앙
+		
+		String id = textField.getText();
 
 	}
 
@@ -200,7 +205,8 @@ public class FakeMain extends JFrame implements ActionListener{
 			ArrayList userPw = new ArrayList();
 			ArrayList userNick = new ArrayList();
 			String nick = null;
-
+			memberId = textField.getText();
+			
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BJH", "root", "1234");
@@ -220,6 +226,7 @@ public class FakeMain extends JFrame implements ActionListener{
 				if(textField.getText().equals(userId.get(i)) && passwordField.getText().equals(userPw.get(i))) {	// 만약 아이디와 비밀번호가 같이 있다면
 					login++;																						// login 1증가.
 					nick = (String) userNick.get(i);																// 유저닉네임을 String으로 저장
+					
 				}
 			}
 			if(login > 0) {	// login이 0보다 크면 회원
