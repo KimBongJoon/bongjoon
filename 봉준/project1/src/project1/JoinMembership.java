@@ -1,29 +1,11 @@
 package project1;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import javax.swing.*;
+import java.awt.event.*;
+import java.sql.*;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.ImageIcon;
-import javax.swing.JPasswordField;
+import java.awt.*;
 
 public class JoinMembership extends JFrame implements ItemListener {
 	JTextField textField;
@@ -148,7 +130,7 @@ public class JoinMembership extends JFrame implements ItemListener {
 				}
 				if(nickCnt > 0) {											// cnt가 0보다 크면 중복된 닉네임이있기때문에 생성불가능.
 					JOptionPane.showMessageDialog(null, "사용중인 닉네임입니다.");
-				}
+				} 
 				else {
 					JOptionPane.showMessageDialog(null, "사용 가능한 닉네임입니다.");
 				}
@@ -256,6 +238,8 @@ public class JoinMembership extends JFrame implements ItemListener {
 				if(nickCnt > 0) {										
 					JOptionPane.showMessageDialog(null, "사용중인 닉네임입니다.");
 				}
+				
+			
 
 				String name = textField.getText();
 				String id = textField_1.getText();
@@ -280,9 +264,14 @@ public class JoinMembership extends JFrame implements ItemListener {
 							ps.setString(2, id);
 							ps.setString(3, pw);
 							ps.setString(4, nickname);
-							ps.setString(5, tel);	
+							ps.setString(5, tel);
+							
+							String sql2 = "insert into charge values (?, 0)";
+							PreparedStatement ps2 = con.prepareStatement(sql2);
+							ps2.setString(1, id);
 
 							ps.executeUpdate();
+							ps2.executeUpdate();
 
 							JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다");
 							dispose();

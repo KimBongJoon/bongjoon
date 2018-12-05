@@ -1,68 +1,39 @@
 package project1;
 
-import javax.swing.*;
-
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
 
-import java.util.ArrayList;
-
-import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import javax.swing.JPasswordField;
-
-public class FakeMain extends JFrame implements ActionListener{
-	JTextField textField;
-	JButton button;
-	JButton btnNewButton;
-	JLabel label_4;
-	JLabel lblNewLabel_5;
-	JLabel lblBType;
-	JLabel lblCType;
-	JLabel lblDType;
-	JLabel lblEType;
-	JLabel lblFType;
-	JButton button_1;
-	JButton button_2;
-	JButton button_3;
-	JButton button_4;
-	JButton button_5;
-	JButton button_6;
-	JPasswordField passwordField;
-		
-	public FakeMain() {
+public class Fakelogin extends JFrame {
+	
+	private JLabel label_4;
+	private JLabel lblNewLabel_5;
+	private JLabel lblBType;
+	private JLabel lblCType;
+	private JLabel lblDType;
+	private JLabel lblEType;
+	private JLabel lblFType;
+	private JButton button_1;
+	private JButton button_2;
+	private JButton button_3;
+	private JButton button_4;
+	private JButton button_5;
+	private JButton button_6;
+	
+	public Fakelogin() {
 		getContentPane().setBackground(Color.WHITE);
 		setSize(655,700);
 		getContentPane().setLayout(null);
-
-		btnNewButton = new JButton("\uB85C\uADF8\uC778");
-		btnNewButton.setBackground(Color.LIGHT_GRAY);
-		btnNewButton.setBounds(421, 11, 85, 23);
-		getContentPane().add(btnNewButton);
-
-		button = new JButton("\uD68C\uC6D0\uAC00\uC785");
-		button.setBackground(Color.LIGHT_GRAY);
-		button.setBounds(518, 11, 98, 23);
-		getContentPane().add(button);
-
-		textField = new JTextField();
-		textField.setBounds(68, 12, 119, 21);
-		getContentPane().add(textField);
-		textField.setColumns(10);
-
-		JLabel lblNewLabel = new JLabel("\uC544\uC774\uB514");
-		lblNewLabel.setBounds(22, 15, 57, 15);
-		getContentPane().add(lblNewLabel);
-
-		JLabel label = new JLabel("\uBE44\uBC00\uBC88\uD638");
-		label.setBounds(209, 15, 73, 15);
-		getContentPane().add(label);
 
 		JLabel lblNewLabel_1 = new JLabel("Suit Shopping Mall");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -171,80 +142,15 @@ public class FakeMain extends JFrame implements ActionListener{
 		button_6.setBounds(453, 409, 137, 199);
 		getContentPane().add(button_6);
 
-		passwordField = new JPasswordField();
-		passwordField.setBounds(272, 12, 137, 21);
-		getContentPane().add(passwordField);
-
-		btnNewButton.addActionListener(this);
-		button.addActionListener(this);
-
 		setVisible(true);
 
 		Dimension frameSize = this.getSize(); // 프레임 사이즈
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // 모니터 사이즈
 		this.setLocation((screenSize.width - frameSize.width)/2, (screenSize.height - frameSize.height)/2); // 화면 중앙
-
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-		if(button == e.getSource()) {		// 회원가입 버튼
-			new JoinMembership();
-		}
-
-		if(btnNewButton == e.getSource()) {		// 로그인 버튼
-
-			int login = 0;	// 중복되는 아이디의 갯수
-			ArrayList userId = new ArrayList();
-			ArrayList userPw = new ArrayList();
-			ArrayList userNick = new ArrayList();
-			String nick = null;
-
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BJH", "root", "1234");
-
-				String id = "select * from member";
-				Statement stmt=con.createStatement();
-				ResultSet rs=stmt.executeQuery(id); 
-				while(rs.next()) { 
-					userId.add(rs.getString(2)); 	// 2번째 값 = id
-					userPw.add(rs.getString(3));	// 3번째 값 = pw
-					userNick.add(rs.getObject(4));	// 4번째 값 = nickname
-				} 
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-			for(int i=0; i<userId.size(); i++) {
-				if(textField.getText().equals(userId.get(i)) && passwordField.getText().equals(userPw.get(i))) {	// 만약 아이디와 비밀번호가 같이 있다면
-					login++;																						// login 1증가.
-					nick = (String) userNick.get(i);																// 유저닉네임을 String으로 저장
-				}
-			}
-			if(login > 0) {	// login이 0보다 크면 회원
-
-				if(nick.length() > 5 && nick.substring(0, 6).equals("russia")) {	// 닉네임 길이가 5보다 크고 russia로 시작된다면
-					JOptionPane.showMessageDialog(null, nick + "님 환영합니다.");		// RealMain페이지로 이동
-					dispose();
-					new RealMain();
-				}
-				else {
-					JOptionPane.showMessageDialog(null, nick + "님 환영합니다.");		// 일반회원은 FakeMain페이지로 이동
-					dispose();
-					new Fakelogin();
-				}
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 틀립니다.");
-			}
-
-		}
 	}
 
 	public static void main(String[] args) {
-		new FakeMain();
+		new Fakelogin();
 	}
-
-
+	
 }
