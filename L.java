@@ -6,11 +6,14 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class L extends JFrame{
 	
-	MyT red = new MyT("redcolor.png", 350, 350);
+	MyT red = new MyT("redcolor.png", 0, 0);
 	
 	
 	
@@ -30,7 +33,7 @@ class MyT extends Thread {
 		lb = new JLabel();
 		ImageIcon icon = new ImageIcon(img);
 		lb.setIcon(icon);
-		lb.setBounds(x, y, 30, 30);
+		lb.setBounds(x, y,13,13);
 		add(lb);
 		
 	}
@@ -44,10 +47,10 @@ class MyT extends Thread {
 		
 		for (a = 0; a < 7; a++) {
 			if(a == 0) {
-				for (y = 100; y <= 150; y++) {
-					lb.setBounds(100,y,30,30);
+				for (y = 274; y <= 321; y++) {
+					lb.setBounds(325,y,13,13);
 					try {
-						Thread.sleep(40);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -55,10 +58,10 @@ class MyT extends Thread {
 				}
 			}
 			if(a == 1) {
-				for (x = 100; x <= 300; x++) {
-					lb.setBounds(x, 200, 30, 30);
+				for (x = 325; x <= 493; x++) {
+					lb.setBounds(x, 321, 13, 13);
 					try {
-						Thread.sleep(40);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -66,10 +69,10 @@ class MyT extends Thread {
 				}
 			}
 			if(a == 2) {
-				for (y = 200; y <= 250; y++) {
-					lb.setBounds(300,y,30,30);
+				for (y = 321; y <= 341; y++) {
+					lb.setBounds(493,y,13,13);
 					try {
-						Thread.sleep(40);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -77,10 +80,10 @@ class MyT extends Thread {
 				}
 			}
 			if(a == 3) {
-				for (x = 300; x >= 100; x--) {
-					lb.setBounds(x, 250, 30, 30);
+				for (x = 493; x >= 325; x--) {
+					lb.setBounds(x, 341, 13, 13);
 					try {
-						Thread.sleep(40);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -88,10 +91,10 @@ class MyT extends Thread {
 				}
 			}
 			if(a == 4) {
-				for (y = 250; y <= 300; y++) {
-					lb.setBounds(100,y,30,30);
+				for (y = 341; y <= 361; y++) {
+					lb.setBounds(325,y,13,13);
 					try {
-						Thread.sleep(40);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -99,38 +102,39 @@ class MyT extends Thread {
 				}
 			}
 			if(a == 5) {
-				for (x = 100; x <= 300; x++) {
-					lb.setBounds(x, 300, 30, 30);
+				for (x = 325; x <= 493; x++) {
+					lb.setBounds(x, 361, 13, 13);
 					try {
-						Thread.sleep(40);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
 			}
-			}
+			
 			if(a == 6) {
-				for (y = 300; y <= 350; y++) {
-					lb.setBounds(300, y, 30, 30);
+				for (y = 361; y <= 412; y++) {
+					lb.setBounds(493, y, 13, 13);
 					try {
-						Thread.sleep(40);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
 			}
-		}else if(random == 1) {
+			}
+		} else if(random == 1) {
 			int b = 0;
+			
 			for (b = 0;  b < 7; b++) {
 				
-			
 			if(b == 0) {
-				for (y = 150; y <= 200; y++) {
-					lb.setBounds(300, y, 30, 30);
+				for (y = 274; y <= 321; y++) {
+					lb.setBounds(493, y, 13, 13);
 					try {
-						Thread.sleep(40);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -138,10 +142,10 @@ class MyT extends Thread {
 				}
 			}
 			if(b == 1) {
-				for (x = 300;  x >= 100; x--) {
-					lb.setBounds(x, 200, 30, 30);
+				for (x = 493;  x >= 325; x--) {
+					lb.setBounds(x, 321, 13, 13);
 					try {
-						Thread.sleep(40);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -149,10 +153,10 @@ class MyT extends Thread {
 				}
 			}
 			if(b == 2) {
-				for (y = 200; y <= 250; y++) {
-					lb.setBounds(100, y, 30, 30);
+				for (y = 321; y <= 341; y++) {
+					lb.setBounds(325, y, 13, 13);
 					try {
-						Thread.sleep(40);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -160,10 +164,10 @@ class MyT extends Thread {
 				}
 			}
 			if(b == 3) {
-				for (x = 100;  x <= 300; x++) {
-					lb.setBounds(x, 250, 30, 30);
+				for (x = 325;  x <= 493; x++) {
+					lb.setBounds(x, 341, 13, 13);
 					try {
-						Thread.sleep(40);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -171,10 +175,10 @@ class MyT extends Thread {
 				}
 			}
 			if(b == 4) {
-				for (y =250; y <= 300; y++) {
-					lb.setBounds(300, y, 30, 30);
+				for (y = 341; y <= 361; y++) {
+					lb.setBounds(493, y, 13, 13);
 					try {
-						Thread.sleep(40);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -182,10 +186,10 @@ class MyT extends Thread {
 				}
 			}
 			if(b == 5) {
-				for (x = 300;  x >= 100; x--) {
-					lb.setBounds(x, 300, 30, 30);
+				for (x = 493;  x >= 325; x--) {
+					lb.setBounds(x, 361, 13, 13);
 					try {
-						Thread.sleep(40);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -193,10 +197,10 @@ class MyT extends Thread {
 				}
 			}
 			if(b == 6) {
-				for (y = 300; y <= 350; y++) {
-					lb.setBounds(100, y, 30, 30);
+				for (y = 361; y <= 412; y++) {
+					lb.setBounds(325, y, 13, 13);
 					try {
-						Thread.sleep(40);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -220,8 +224,22 @@ class MyT extends Thread {
 			setSize(800, 800);
 			getContentPane().setLayout(null);
 			
-			JLabel label = new JLabel();
+			JLabel label = new JLabel("");
+			label.setIcon(new ImageIcon("\uC6D0\uBCF8\uC0AC\uB2E4\uB9AC.png"));
+			label.setBounds(0, 0, 784, 567);
 			getContentPane().add(label);
+			
+			JButton btnNewButton = new JButton("START");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					red.start();
+					
+				}
+			});
+			btnNewButton.setBounds(303, 576, 224, 40);
+			getContentPane().add(btnNewButton);
+			
+			
 			setVisible(true);
 			
 			
