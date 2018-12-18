@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
+// 가짜홈쇼핑페이지 로그인했을
 public class Fakelogin extends JFrame {
 	
 	private JLabel label_4;
@@ -141,6 +142,17 @@ public class Fakelogin extends JFrame {
 		button_6.setIcon(new ImageIcon("suit6.jpg"));
 		button_6.setBounds(453, 409, 137, 199);
 		getContentPane().add(button_6);
+		
+		JButton btnNewButton = new JButton("\uB85C\uADF8\uC544\uC6C3");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				new FakeMain();
+			}
+		});
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBounds(530, 10, 97, 23);
+		getContentPane().add(btnNewButton);
 
 		setVisible(true);
 
@@ -152,5 +164,4 @@ public class Fakelogin extends JFrame {
 	public static void main(String[] args) {
 		new Fakelogin();
 	}
-	
 }

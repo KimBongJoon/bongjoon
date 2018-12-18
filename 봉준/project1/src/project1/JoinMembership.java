@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.*;
 
+// 회원가입 페이지
 public class JoinMembership extends JFrame implements ItemListener {
 	JTextField textField;
 	JTextField textField_1;

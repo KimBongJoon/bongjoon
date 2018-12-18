@@ -5,9 +5,10 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.SwingConstants;
 
+// 도박홈페이지
 public class RealMain extends JFrame {
 	
-	Game game = new Game();
+	FakeMain fake = null;
 	Charge charge = new Charge();
 	private JTextField textField;
 	private JTextField textField_1;
@@ -33,7 +34,7 @@ public class RealMain extends JFrame {
 		JButton btnNewButton_1 = new JButton();		// 홀수짝수 사진
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.oddEven();
+				new LadderGame();
 			}
 		});
 		btnNewButton_1.setIcon(new ImageIcon("2.gif"));
@@ -54,6 +55,8 @@ public class RealMain extends JFrame {
 		panel.setBackground(Color.LIGHT_GRAY);
 		panel.setBounds(214, 225, 204, 280);
 		panel.setLayout(null);
+		
+		
 		getContentPane().add(panel);
 		
 		textField_1 = new JTextField();
@@ -119,5 +122,4 @@ public class RealMain extends JFrame {
 	public static void main(String[] args) {
 		new RealMain();
 	}
-	
 }

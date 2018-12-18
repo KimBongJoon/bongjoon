@@ -1,6 +1,7 @@
 package project1;
 
 import javax.swing.ButtonGroup;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,6 +12,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -25,16 +27,26 @@ import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+// 달팽이경주 페이지
 public class RacingGame extends JFrame{
+	
+	JRadioButton rdbtnNewRadioButton;
+	JRadioButton radioButton;
+	JRadioButton radioButton_1;
+	
+	FakeMain fake = null;
+	ArrayList userMoney = new ArrayList<>();	// 사용자들 보유금액 리스트
+	ArrayList userId = new ArrayList<>();
+	int balance = 0;
 
-	MyThread snail1 = new MyThread("race1.png", 10, 25);		// 쓰레드를 사용해서 이미지 움직이기
+	MyThread snail1 = new MyThread("race1.png", 10, 25);		
 	MyThread snail2 = new MyThread("race2.png", 10, 145);
 	MyThread snail3 = new MyThread("race3.png", 10, 260);
 	ArrayList<Integer> list = new ArrayList<>();
-	int betMoney = 0;
+	static int betMoney = 0;
 	private JTextField textField;
 
-	class MyThread extends Thread{
+	class MyThread extends Thread{		// Thread 사용해서 이미지 움직이기
 
 		int x,y;
 		JLabel label;
@@ -73,15 +85,130 @@ public class RacingGame extends JFrame{
 				list.add(3);
 			}
 			if(list.size() == 3) {		// 마지막 달팽이까지 도착하면 1,2,3등 출력
-				System.out.println("1등 : " + list.get(0) + "번 달팽이");
-				System.out.println("2등 : " + list.get(1) + "번 달팽이");
-				System.out.println("3등 : " + list.get(2) + "번 달팽이");				
+				
+				if(rdbtnNewRadioButton.isSelected() && list.get(0) == 1) {		// 선택한 달팽이가 1등했을때
+					JOptionPane.showMessageDialog(null, "1등 : " + list.get(0) + "번 달팽이, 2등 : " + list.get(1) + "번 달팽이, 3등 : " + list.get(2) + "번 달팽이");
+					try {
+						Class.forName("com.mysql.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BJH", "root", "1234");
+
+						String id = "select * from charge";
+						Statement stmt=con.createStatement();
+						ResultSet rs=stmt.executeQuery(id); 
+						while(rs.next()) {
+							userId.add(rs.getString(1));
+							userMoney.add(rs.getInt(2));	// charge테이블 deposit값
+						}
+						for(int i=0; i<userId.size(); i++) {
+							if(userId.get(i).equals(fake.memberId)) {
+								balance = (int)userMoney.get(i);
+							}
+						}
+
+						String sql = "update charge set deposit = ? where member_id = ?";
+						PreparedStatement ps = con.prepareStatement(sql);
+						ps.setInt(1, (int) (balance + betMoney * 2.5));	// 잔액 + 충전 금액을 저장
+						ps.setString(2, fake.memberId);			
+						ps.executeUpdate();
+						balance = (int) (balance + betMoney * 2.5);
+						textField.setText(String.valueOf(balance));
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				else if(radioButton.isSelected() && list.get(0) == 2){
+					JOptionPane.showMessageDialog(null, "1등 : " + list.get(0) + "번 달팽이, 2등 : " + list.get(1) + "번 달팽이, 3등 : " + list.get(2) + "번 달팽이");
+					try {
+						Class.forName("com.mysql.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BJH", "root", "1234");
+
+						String id = "select * from charge";
+						Statement stmt=con.createStatement();
+						ResultSet rs=stmt.executeQuery(id); 
+						while(rs.next()) {
+							userId.add(rs.getString(1));
+							userMoney.add(rs.getInt(2));	// charge테이블 deposit값
+						}
+						for(int i=0; i<userId.size(); i++) {
+							if(userId.get(i).equals(fake.memberId)) {
+								balance = (int)userMoney.get(i);
+							}
+						}
+
+						String sql = "update charge set deposit = ? where member_id = ?";
+						PreparedStatement ps = con.prepareStatement(sql);
+						ps.setInt(1, (int) (balance + betMoney * 2.5));	// 잔액 + 충전 금액을 저장
+						ps.setString(2, fake.memberId);			
+						ps.executeUpdate();
+						balance = (int) (balance + betMoney * 2.5);
+						textField.setText(String.valueOf(balance));
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				else if(radioButton_1.isSelected() && list.get(0) == 3) {
+					JOptionPane.showMessageDialog(null, "1등 : " + list.get(0) + "번 달팽이, 2등 : " + list.get(1) + "번 달팽이, 3등 : " + list.get(2) + "번 달팽이");
+					try {
+						Class.forName("com.mysql.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BJH", "root", "1234");
+
+						String id = "select * from charge";
+						Statement stmt=con.createStatement();
+						ResultSet rs=stmt.executeQuery(id); 
+						while(rs.next()) {
+							userId.add(rs.getString(1));
+							userMoney.add(rs.getInt(2));	// charge테이블 deposit값
+						}
+						for(int i=0; i<userId.size(); i++) {
+							if(userId.get(i).equals(fake.memberId)) {
+								balance = (int)userMoney.get(i);
+							}
+						}
+
+						String sql = "update charge set deposit = ? where member_id = ?";
+						PreparedStatement ps = con.prepareStatement(sql);
+						ps.setInt(1, (int) (balance + betMoney * 2.5));	// 잔액 + 충전 금액을 저장
+						ps.setString(2, fake.memberId);			
+						ps.executeUpdate();
+						balance = (int) (balance + betMoney * 2.5);
+						textField.setText(String.valueOf(balance));
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "1등 : " + list.get(0) + "번 달팽이, 2등 : " + list.get(1) + "번 달팽이, 3등 : " + list.get(2) + "번 달팽이");
+				}
 			}
 		}
 
 	}
 
 	public RacingGame() {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BJH", "root", "1234");
+
+			String id = "select * from charge";
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(id); 
+			while(rs.next()) {
+				userId.add(rs.getString(1));
+				userMoney.add(rs.getInt(2));	
+			}
+			for(int i=0; i<userId.size(); i++) {
+				if(userId.get(i).equals(fake.memberId)) {	// 로그인한 아이디의 DB에 저장된 포인트 꺼내기
+					balance = (int)userMoney.get(i);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		getContentPane().setBackground(new Color(255, 255, 255));
 
@@ -95,9 +222,15 @@ public class RacingGame extends JFrame{
 		btnNewButton.setFont(new Font("HY목각파임B", Font.BOLD, 15));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				snail1.start();		// 버튼 클릭시 달팽이경주 시작
-				snail2.start();
-				snail3.start();
+				if(radioButton.isSelected() || radioButton_1.isSelected() || rdbtnNewRadioButton.isSelected()) {
+					btnNewButton.setEnabled(false);
+					snail1.start();		// 버튼 클릭시 달팽이경주 시작
+					snail2.start();
+					snail3.start();					
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "달팽이를 선택하세요");
+				}
 			}
 		});
 		btnNewButton.setBounds(260, 390, 260, 50);
@@ -177,19 +310,19 @@ public class RacingGame extends JFrame{
 		label_9.setBounds(579, 598, 205, 75);
 		getContentPane().add(label_9);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("1\uBC88 \uB2EC\uD33D\uC774");
+		rdbtnNewRadioButton = new JRadioButton("1\uBC88 \uB2EC\uD33D\uC774");
 		rdbtnNewRadioButton.setBackground(new Color(255, 204, 153));
 		rdbtnNewRadioButton.setFont(new Font("HY목각파임B", Font.PLAIN, 15));
 		rdbtnNewRadioButton.setBounds(48, 679, 101, 23);
 		getContentPane().add(rdbtnNewRadioButton);
-		
-		JRadioButton radioButton = new JRadioButton("2\uBC88 \uB2EC\uD33D\uC774");
+
+		radioButton = new JRadioButton("2\uBC88 \uB2EC\uD33D\uC774");
 		radioButton.setBackground(new Color(255, 204, 153));
 		radioButton.setFont(new Font("HY목각파임B", Font.PLAIN, 15));
 		radioButton.setBounds(344, 679, 101, 23);
 		getContentPane().add(radioButton);
-		
-		JRadioButton radioButton_1 = new JRadioButton("3\uBC88 \uB2EC\uD33D\uC774");
+
+		radioButton_1 = new JRadioButton("3\uBC88 \uB2EC\uD33D\uC774");
 		radioButton_1.setBackground(new Color(255, 204, 153));
 		radioButton_1.setFont(new Font("HY목각파임B", Font.PLAIN, 15));
 		radioButton_1.setBounds(631, 679, 101, 23);
@@ -207,7 +340,7 @@ public class RacingGame extends JFrame{
 		getContentPane().add(lblNewLabel_3);
 		
 		textField = new JTextField();
-		textField.setText("500000000");
+		textField.setText(String.valueOf(balance));
 		textField.setBackground(new Color(255, 204, 102));
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setFont(new Font("HY목각파임B", Font.PLAIN, 17));
@@ -259,8 +392,30 @@ public class RacingGame extends JFrame{
 		rdbtnNewRadioButton.addItemListener(new ItemListener() {			
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED) {
+					
 					betMoney = Integer.parseInt(JOptionPane.showInputDialog("배팅하실 금액을 입력하세요"));
-					System.out.println(betMoney);
+					
+					try {
+						Class.forName("com.mysql.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BJH", "root", "1234");
+						if(balance > betMoney) {
+							String sql = "update charge set deposit = ? where member_id = ?";
+							PreparedStatement ps = con.prepareStatement(sql);
+							ps.setInt(1, balance - betMoney);	// 잔액 - 배팅금액 저장
+							ps.setString(2, fake.memberId);			
+							ps.executeUpdate();
+							balance = balance - betMoney;
+							textField.setText(String.valueOf(balance));		// 포인트 새로고침
+							radioButton.setEnabled(false);
+							radioButton_1.setEnabled(false);
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "포인트가 부족합니다");
+						}
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					
 				}
 			}
 		});
@@ -269,7 +424,28 @@ public class RacingGame extends JFrame{
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED) {
 					betMoney = Integer.parseInt(JOptionPane.showInputDialog("배팅하실 금액을 입력하세요"));
-					System.out.println(betMoney);
+					
+					try {
+						Class.forName("com.mysql.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BJH", "root", "1234");
+						if(balance > betMoney) {
+							String sql = "update charge set deposit = ? where member_id = ?";
+							PreparedStatement ps = con.prepareStatement(sql);
+							ps.setInt(1, balance - betMoney);	// 잔액 - 배팅금액 저장
+							ps.setString(2, fake.memberId);			
+							ps.executeUpdate();
+							balance = balance - betMoney;
+							textField.setText(String.valueOf(balance));		// 포인트 새로고침
+							radioButton_1.setEnabled(false);
+							rdbtnNewRadioButton.setEnabled(false);
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "포인트가 부족합니다");
+						}
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					
 				}
 			}
 		});
@@ -278,7 +454,28 @@ public class RacingGame extends JFrame{
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED) {
 					betMoney = Integer.parseInt(JOptionPane.showInputDialog("배팅하실 금액을 입력하세요"));
-					System.out.println(betMoney);
+					
+					try {
+						Class.forName("com.mysql.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BJH", "root", "1234");
+						if(balance > betMoney) {
+							String sql = "update charge set deposit = ? where member_id = ?";
+							PreparedStatement ps = con.prepareStatement(sql);
+							ps.setInt(1, balance - betMoney);	// 잔액 - 배팅금액 저장
+							ps.setString(2, fake.memberId);			
+							ps.executeUpdate();
+							balance = balance - betMoney;
+							textField.setText(String.valueOf(balance));		// 포인트 새로고침
+							radioButton.setEnabled(false);
+							rdbtnNewRadioButton.setEnabled(false);
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "포인트가 부족합니다");
+						}
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					
 				}
 			}
 		});

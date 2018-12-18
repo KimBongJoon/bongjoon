@@ -1,13 +1,10 @@
 package project1;
 
 import javax.swing.*;
-
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.*;
 
 import java.util.ArrayList;
@@ -19,6 +16,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPasswordField;
 
+// 가짜 홈쇼핑 페이지
 public class FakeMain extends JFrame implements ActionListener{
 	JTextField textField;
 	JButton button;
