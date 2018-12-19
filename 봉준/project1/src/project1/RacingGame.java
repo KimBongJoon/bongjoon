@@ -116,14 +116,14 @@ public class RacingGame extends JFrame{
 
 						String sql = "update charge set deposit = ? where member_id = ?";
 						PreparedStatement ps = con.prepareStatement(sql);
-						ps.setInt(1, (int) (balance + betMoney * 2.5));	// 잔액 + 충전 금액을 저장
+						ps.setInt(1, (int) (balance + betMoney * 2.5));	// 잔액 + 당첨금액을 저장
 						ps.setString(2, fake.memberId);			
 						ps.executeUpdate();
 						balance = (int) (balance + betMoney * 2.5);
 						textField.setText(String.valueOf(balance));
 						
 						if((betMoney * 2.5) >= 5000000) {
-							try {	// 출금내역 파일로 저장
+							try {	// 당첨금액을 파일로 저장
 								FileWriter file = new FileWriter(cnt + "." + (int)(betMoney * 2.5) + "Point.txt");
 								file.write(fake.memberId + "님 " + (int)(betMoney * 2.5) + "포인트 당첨!\r\n");
 								file.write(date);
@@ -160,14 +160,14 @@ public class RacingGame extends JFrame{
 
 						String sql = "update charge set deposit = ? where member_id = ?";
 						PreparedStatement ps = con.prepareStatement(sql);
-						ps.setInt(1, (int) (balance + betMoney * 2.5));	// 잔액 + 충전 금액을 저장
+						ps.setInt(1, (int) (balance + betMoney * 2.5));	// 잔액 + 당첨금액을 저장
 						ps.setString(2, fake.memberId);			
 						ps.executeUpdate();
 						balance = (int) (balance + betMoney * 2.5);
 						textField.setText(String.valueOf(balance));
 						
 						if((betMoney * 2.5) >= 5000000) {
-							try {	// 출금내역 파일로 저장
+							try {	// 당첨금액을 파일로 저장
 								FileWriter file = new FileWriter(cnt + "." + (int)(betMoney * 2.5) + "Point.txt");
 								file.write(fake.memberId + "님 " + (int)(betMoney * 2.5) + "포인트 당첨!\r\n");
 								file.write(date);
@@ -204,14 +204,14 @@ public class RacingGame extends JFrame{
 
 						String sql = "update charge set deposit = ? where member_id = ?";
 						PreparedStatement ps = con.prepareStatement(sql);
-						ps.setInt(1, (int) (balance + betMoney * 2.5));	// 잔액 + 충전 금액을 저장
+						ps.setInt(1, (int) (balance + betMoney * 2.5));	// 잔액 + 당첨금액을 저장
 						ps.setString(2, fake.memberId);			
 						ps.executeUpdate();
 						balance = (int) (balance + betMoney * 2.5);
 						textField.setText(String.valueOf(balance));
 						
 						if((betMoney * 2.5) >= 5000000) {
-							try {	// 출금내역 파일로 저장
+							try {	// 당첨금액을 파일로 저장
 								FileWriter file = new FileWriter(cnt + "." + (int)(betMoney * 2.5) + "Point.txt");
 								file.write(fake.memberId + "님 " + (int)(betMoney * 2.5) + "포인트 당첨!\r\n");
 								file.write(date);

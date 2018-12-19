@@ -130,23 +130,24 @@ public class Charge extends JFrame {
 		setSize(500, 500);
 		
 		
-		String[] file = new File("D:\\bongjoon\\project1").list();
+		String[] file = new File("D:\\bongjoon\\project1").list();	// 저장위치에 있는 파일 전부 검색
 		ArrayList list = new ArrayList<>();
 		
 		for(int i=0; i<file.length; i++) {
-			if(file[i].startsWith(fake.memberId)) {
+			if(file[i].startsWith(fake.memberId)) {		// member 아이디로 시작되는 파일만 가져오기
 				list.add(file[i]);
 			}
 		}
 
+		// 테이블 생성
 		String[] title = {"입/출금 내역", "시간"};
 		String[][] content = new String[list.size()][3];
 		
 		for(int i=0; i<content.length; i++) {
 			try {
 				Scanner sc = new Scanner(new File((String) list.get(i)));
-				content[i][0] = sc.nextLine();
-				content[i][1] = sc.nextLine();
+				content[i][0] = sc.nextLine();	// 입,출금 내역
+				content[i][1] = sc.nextLine();	// 시간
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}	

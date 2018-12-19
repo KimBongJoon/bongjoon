@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
-// 가짜홈쇼핑페이지 로그인했을
+// 가짜홈쇼핑페이지 로그인했을 때
 public class Fakelogin extends JFrame {
 	
 	private JLabel label_4;
