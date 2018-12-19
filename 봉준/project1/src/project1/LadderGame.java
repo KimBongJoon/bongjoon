@@ -5,19 +5,28 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
 public class LadderGame extends JFrame{
+	
+	Calendar now = Calendar.getInstance();
+	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd(E) HH:mm:ss");
+	String date = sdf.format(now.getTime());
+	int cnt = 1;
 	
 	static String result = null;
 	static int betMoney = 0;
@@ -153,6 +162,19 @@ public class LadderGame extends JFrame{
 						ps.executeUpdate();
 						balance = (int) (balance + betMoney * 1.75);
 						textField.setText(String.valueOf(balance));
+						
+						if((betMoney * 1.75) >= 5000000) {
+							try {	// 출금내역 파일로 저장
+								FileWriter file = new FileWriter(cnt + "." + (int)(betMoney * 1.75) + "Point.txt");
+								file.write(fake.memberId + "님 " + (int)(betMoney * 1.75) + "포인트 당첨!\r\n");
+								file.write(date);
+								file.flush();
+								file.close();
+								cnt++;
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
 
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -260,6 +282,19 @@ public class LadderGame extends JFrame{
 						ps.executeUpdate();
 						balance = (int) (balance + betMoney * 1.75);
 						textField.setText(String.valueOf(balance));
+						
+						if((betMoney * 1.75) >= 5000000) {
+							try {	// 출금내역 파일로 저장
+								FileWriter file = new FileWriter(cnt + "." + (int)(betMoney * 1.75) + "Point.txt");
+								file.write(fake.memberId + "님 " + (int)(betMoney * 1.75) + "포인트 당첨!\r\n");
+								file.write(date);
+								file.flush();
+								file.close();
+								cnt++;
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
 
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -331,6 +366,7 @@ public class LadderGame extends JFrame{
 						balance = balance - betMoney;
 						textField.setText(String.valueOf(balance));		// 포인트 새로고침
 						button.setEnabled(false);
+						red.start();
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "포인트가 부족합니다");
@@ -338,9 +374,6 @@ public class LadderGame extends JFrame{
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				textField.setText(String.valueOf(balance));		// 포인트 새로고침
-				button.setEnabled(false);
-				red.start();
 			}
 		});
 		button.setForeground(new Color(0, 0, 0));
@@ -350,9 +383,14 @@ public class LadderGame extends JFrame{
 		getContentPane().add(button);
 		
 		JLabel label = new JLabel();
-		label.setIcon(new ImageIcon("C:\\Users\\user\\Desktop\\ladder.png"));
+		label.setIcon(new ImageIcon("ladder.png"));
 		label.setBounds(0, 0, 714, 567);
 		getContentPane().add(label);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon("ladder2.png"));
+		lblNewLabel.setBounds(0, 565, 714, 96);
+		getContentPane().add(lblNewLabel);
 
 		Dimension frameSize = this.getSize();
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

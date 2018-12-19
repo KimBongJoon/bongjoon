@@ -10,12 +10,16 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -29,6 +33,11 @@ import javax.swing.JTextField;
 
 // 달팽이경주 페이지
 public class RacingGame extends JFrame{
+	
+	Calendar now = Calendar.getInstance();
+	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd(E) HH:mm:ss");
+	String date = sdf.format(now.getTime());
+	int cnt = 1;
 	
 	JRadioButton rdbtnNewRadioButton;
 	JRadioButton radioButton;
@@ -112,6 +121,19 @@ public class RacingGame extends JFrame{
 						ps.executeUpdate();
 						balance = (int) (balance + betMoney * 2.5);
 						textField.setText(String.valueOf(balance));
+						
+						if((betMoney * 2.5) >= 5000000) {
+							try {	// 출금내역 파일로 저장
+								FileWriter file = new FileWriter(cnt + "." + (int)(betMoney * 2.5) + "Point.txt");
+								file.write(fake.memberId + "님 " + (int)(betMoney * 2.5) + "포인트 당첨!\r\n");
+								file.write(date);
+								file.flush();
+								file.close();
+								cnt++;
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
 
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -143,6 +165,19 @@ public class RacingGame extends JFrame{
 						ps.executeUpdate();
 						balance = (int) (balance + betMoney * 2.5);
 						textField.setText(String.valueOf(balance));
+						
+						if((betMoney * 2.5) >= 5000000) {
+							try {	// 출금내역 파일로 저장
+								FileWriter file = new FileWriter(cnt + "." + (int)(betMoney * 2.5) + "Point.txt");
+								file.write(fake.memberId + "님 " + (int)(betMoney * 2.5) + "포인트 당첨!\r\n");
+								file.write(date);
+								file.flush();
+								file.close();
+								cnt++;
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
 
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -174,6 +209,19 @@ public class RacingGame extends JFrame{
 						ps.executeUpdate();
 						balance = (int) (balance + betMoney * 2.5);
 						textField.setText(String.valueOf(balance));
+						
+						if((betMoney * 2.5) >= 5000000) {
+							try {	// 출금내역 파일로 저장
+								FileWriter file = new FileWriter(cnt + "." + (int)(betMoney * 2.5) + "Point.txt");
+								file.write(fake.memberId + "님 " + (int)(betMoney * 2.5) + "포인트 당첨!\r\n");
+								file.write(date);
+								file.flush();
+								file.close();
+								cnt++;
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
 
 					} catch (Exception e) {
 						e.printStackTrace();

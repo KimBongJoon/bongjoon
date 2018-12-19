@@ -1,9 +1,13 @@
 package project1;
 
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.SwingConstants;
 
 // 도박홈페이지
 public class RealMain extends JFrame {
@@ -56,7 +60,6 @@ public class RealMain extends JFrame {
 		panel.setBounds(214, 225, 204, 280);
 		panel.setLayout(null);
 		
-		
 		getContentPane().add(panel);
 		
 		textField_1 = new JTextField();
@@ -69,6 +72,39 @@ public class RealMain extends JFrame {
 		textField_1.setBounds(0, 0, 204, 40);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(0, 39, 204, 241);
+		panel_2.setLayout(new BorderLayout());
+		
+		String[] file = new File("D:\\bongjoon\\project1").list();
+		ArrayList list = new ArrayList<>();
+		
+		for(int i=0; i<file.length; i++) {
+			if(file[i].endsWith("Point.txt")) {
+				list.add(file[i]);
+			}
+		}
+
+		String[] title = {"당첨 금액", "시간"};
+		String[][] content = new String[list.size()][3];
+		
+		for(int i=0; i<content.length; i++) {
+			try {
+				Scanner sc = new Scanner(new File((String) list.get(i)));
+				content[i][0] = sc.nextLine();
+				content[i][1] = sc.nextLine();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}	
+		}
+		
+		JTable table = new JTable(content, title);
+		JScrollPane scroll = new JScrollPane(table);	
+		panel_2.add(scroll);
+		
+		
+		panel.add(panel_2);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 80, 434, 38);
